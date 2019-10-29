@@ -47,6 +47,7 @@ const App = () => {
         </View>
       ) : (
         <ScrollView>
+          <Text style={styles.heading}>Lista Piloti</Text>
           <Pilots pilots={pilots} />
         </ScrollView>
       )}
@@ -56,9 +57,16 @@ const App = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 50,
-    backgroundColor: "#fff"
+    display: "flex",
+    alignItems: "center",
+    backgroundColor: "pink"
+  },
+  heading: {
+    fontSize: 26,
+    fontWeight: "800",
+    textAlign: "center",
+    marginBottom: 10,
+    marginTop: 10
   }
 });
 

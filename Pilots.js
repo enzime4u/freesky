@@ -10,6 +10,7 @@ const Pilots = ({ pilots }) => (
         key={pilot.id}
         name={pilot.name}
         flightHours={pilot.flight_hours}
+        profileImage={pilot.profile_image}
       />
     ))}
   </View>
@@ -18,8 +19,7 @@ const Pilots = ({ pilots }) => (
 const styles = StyleSheet.create({
   pilots: {
     display: "flex",
-    justifyContent: "center",
-    padding: 20
+    alignItems: "center"
   }
 });
 
