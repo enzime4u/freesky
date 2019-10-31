@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, ScrollView, SafeAreaView } from "react-native";
 import Pilots from "./Pilots";
+import StartComponent from "./StartComponent";
 
 const PILOTS_URL = "https://freesky.ro/ro/partners/getpilots";
 
@@ -40,18 +41,19 @@ const App = () => {
   const { isLoading, pilots, error } = usePilotsData();
 
   return (
-    <SafeAreaView style={styles.container}>
-      {isLoading ? (
-        <View>
-          <Text>Loading pilots....</Text>
-        </View>
-      ) : (
-        <ScrollView>
-          <Text style={styles.heading}>Lista Piloti</Text>
-          <Pilots pilots={pilots} />
-        </ScrollView>
-      )}
-    </SafeAreaView>
+    <StartComponent />
+    // <SafeAreaView style={styles.container}>
+    //   {isLoading ? (
+    //     <View>
+    //       <Text>Loading pilots....</Text>
+    //     </View>
+    //   ) : (
+    //     <ScrollView>
+    //       <Text style={styles.heading}>Lista Piloti</Text>
+    //       <Pilots pilots={pilots} />
+    //     </ScrollView>
+    //   )}
+    // </SafeAreaView>
   );
 };
 
