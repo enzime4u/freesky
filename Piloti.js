@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image } from "react-native";
 
 import Pilot from "./Pilot";
 
-const Pilots = ({ pilots }) => (
+const Piloti = ({ pilots }) => (
   <View style={styles.pilots}>
     {pilots.map(pilot => (
       <Pilot
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Pilots;
+export default Piloti;

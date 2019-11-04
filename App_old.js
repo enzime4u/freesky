@@ -1,19 +1,14 @@
 import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  SafeAreaView,
-  Button
-} from "react-native";
+import { StyleSheet, Text, View, ScrollView, SafeAreaView } from "react-native";
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
 
 import Piloti from "./Piloti";
 import Intro from "./Intro";
 
 const PILOTS_URL = "https://freesky.ro/ro/partners/getpilots";
 
-// fn for fetching data in general
+// fn for fetching in general
 const fetchData = url => {
   return fetch(`${url}`).then(response => response.json());
 };
@@ -21,12 +16,6 @@ const fetchData = url => {
 function normalizePilots(pilots) {
   return pilots.map(pilot => ({ ...pilot, flightHours: pilot.flight_hours }));
 }
-
-const pages = {
-  intro: Intro,
-  piloti: Piloti,
-  zboruri: null
-};
 
 const usePilotsData = () => {
   const [pilots, setPilots] = useState([]);
@@ -51,13 +40,17 @@ const usePilotsData = () => {
   };
 };
 
+const pages = {
+  intro: Intro,
+  piloti: Piloti
+};
+
 const App = () => {
   const { isLoading, pilots, error } = usePilotsData();
-  const [page, setPage] = useState("intro");
   return (
-    <View>
+    <SafeAreaView style={styles.container}>
       <Intro />
-    </View>
+    </SafeAreaView>
   );
 };
 
