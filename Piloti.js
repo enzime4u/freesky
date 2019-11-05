@@ -1,25 +1,71 @@
-import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View, Image, SafeAreaView } from "react-native";
 
 import Pilot from "./Pilot";
+import { ScrollView } from "react-native-gesture-handler";
 
-const Piloti = ({ pilots }) => (
-  <View style={styles.pilots}>
-    {pilots.map(pilot => (
-      <Pilot
-        key={pilot.id}
-        name={pilot.name}
-        flightHours={pilot.flight_hours}
-        profileImage={pilot.profile_image}
-      />
-    ))}
-  </View>
-);
+// make url as a var so can be easily accesible
+const PILOTS_URL = "https://freesky.ro/ro/partners/getpilots";
+
+// fn to normalize the pilots data and assign the flightHours the right type of data
+function normalizePilots(pilots) {
+  return pilots.map(pilot => ({ ...pilot, flightHours: pilot.flight_hours }));
+}
+
+// fn for fetching data from an url
+const fetchData = url => {
+  return fetch(`${url}`).then(response => response.json());
+};
+
+const usePilotsData = () => {
+  const [pilots, setPilots] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetchData(PILOTS_URL)
+      .then(reply => {
+        setIsLoading(false);
+        setPilots(reply);
+      })
+      .catch(error => {
+        setIsLoading(false);
+        setError(error);
+      });
+  }, []);
+  return {
+    pilots: normalizePilots(pilots),
+    isLoading,
+    error
+  };
+};
+
+const Piloti = ({ setPage }) => {
+  const { isLoading, pilots, error } = usePilotsData();
+
+  return (
+    <ScrollView>
+      <View style={styles.piloti}>
+        {pilots.map(pilot => (
+          <Pilot
+            key={pilot.id}
+            name={pilot.name}
+            flightHours={pilot.flight_hours}
+            profileImage={pilot.profile_image}
+          />
+        ))}
+      </View>
+    </ScrollView>
+    // add a go back button
+  );
+};
 
 const styles = StyleSheet.create({
-  pilots: {
+  piloti: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
+    paddingTop: 20,
+    paddingBottom: 50
   }
 });
 

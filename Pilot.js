@@ -23,19 +23,19 @@ const styles = StyleSheet.create({
     display: "flex",
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 7,
+    justifyContent: "center",
     backgroundColor: "#5cc9f5",
+    marginBottom: 7,
     borderRadius: 5,
-    padding: 5
+    padding: 8
   },
   img: {
-    borderColor: "blue",
-    height: 70,
-    width: 70
+    height: 50,
+    width: 50,
+    borderRadius: 3
   },
   details: {
-    flexGrow: 1,
+    flexGrow: 2,
     marginLeft: 10
   },
   name: {

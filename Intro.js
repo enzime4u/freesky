@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, ScrollView, SafeAreaView } from "react-native";
 import { Button } from "react-native-elements";
 
-export default function Intro() {
-  const [page, setPage] = useState("intro");
+export default function Intro({ setPage }) {
   return (
     <View style={styles.wraper}>
       <Text style={styles.heading}>FreeSky</Text>
       <View style={styles.container}>
-        <Button style={styles.butonPiloti} title="Lista Piloti" disabled />
+        <Button style={styles.butonZboruri} title="Lista Zboruri" disabled />
         <Button
-          style={styles.butonZboruri}
-          title="Lista Zboruri"
+          style={styles.butonPiloti}
+          title="Lista Piloti"
           onPress={() => setPage("piloti")}
         />
       </View>
