@@ -51,19 +51,12 @@ const usePilotsData = () => {
 const Piloti = ({ setPage }) => {
   const { isLoading, pilots, error } = usePilotsData();
 
-  // returns the whole pilots array
   const [search, setSearch] = useState("");
-
-  // results are the pilots array (when mounted)
   const [results, setResults] = useState(pilots);
 
-  // pilots is the searched list
-  // "name" is the list of properties that will be searched
   const searcher = new FuzzySearch(pilots, ["name"]);
 
-  // handler for  change
   function onSearch(search) {
-    // fuzzy-search method for searching thru pilots with the search value
     const result = searcher.search(search);
 
     setSearch(search);
@@ -71,55 +64,39 @@ const Piloti = ({ setPage }) => {
   }
 
   return (
-    <View>
-      {!pilots.length ? (
-        <Text style={styles.loading}>Loading</Text>
-      ) : (
-        <View style={styles.container}>
-          <TextInput
-            editalble
-            style={styles.searchInput}
-            type="text"
-            onChangeText={text => onSearch(text)}
-            value={search}
-          />
-          <View style={styles.piloti}>
-            <ScrollView>
-              {(results.length ? results : pilots).map(pilot => (
-                <Pilot
-                  key={pilot.id}
-                  name={pilot.name}
-                  flightHours={pilot.flight_hours}
-                  profileImage={pilot.profile_image}
-                />
-              ))}
-            </ScrollView>
-          </View>
-        </View>
-      )}
+    // here I get an error from the simulator
+    // needed the <TextInput> form react-native
+    <View style={styles.container}>
+      <TextInput
+        type="text"
+        onChange={e => onSearch(e.target.value)}
+        value={search}
+      />
+      <View style={styles.piloti}>
+        <ScrollView>
+          {pilots.map(pilot => (
+            <Pilot
+              key={pilot.id}
+              name={pilot.name}
+              flightHours={pilot.flight_hours}
+              profileImage={pilot.profile_image}
+            />
+          ))}
+        </ScrollView>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    padding: 5
+    padding: 10
   },
   piloti: {
     display: "flex",
     alignItems: "center",
     paddingTop: 20,
     paddingBottom: 50
-  },
-  loading: {
-    textAlign: "center",
-    fontSize: 18
-  },
-  searchInput: {
-    borderColor: "#5cc9f5",
-    borderWidth: 1,
-    height: 40,
-    marginTop: 100
   }
 });
 

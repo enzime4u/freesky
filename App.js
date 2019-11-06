@@ -22,7 +22,6 @@ const pages = {
 const App = () => {
   const [page, setPage] = useState("intro");
   const Page = pages[page];
-  console.log(pages[page]);
   return (
     <View style={styles.container}>
       {Page !== Intro ? (
